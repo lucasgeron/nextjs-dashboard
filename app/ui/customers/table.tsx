@@ -6,6 +6,7 @@ import {
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
 import { fetchFilteredCustomers } from '@/app/lib/data';
+import { DeleteCustomer, UpdateCustomer } from './buttons';
 
 export default async function CustomersTable({
   query,
@@ -80,6 +81,9 @@ export default async function CustomersTable({
                   <th scope="col" className="w-2/12 px-4 py-5 font-medium">
                     Total Paid
                   </th>
+                  <th scope="col" className="w-1/12 px-4 py-5 font-medium">
+                    Actions
+                  </th>
                 </tr>
               </thead>
 
@@ -109,6 +113,12 @@ export default async function CustomersTable({
                     </td>
                     <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                       {customer.total_paid}
+                    </td>
+                    <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                      <div className="flex justify-end gap-3">
+                        <UpdateCustomer id={customer.id} />
+                        <DeleteCustomer id={customer.id} />
+                      </div>
                     </td>
                   </tr>
                 ))}

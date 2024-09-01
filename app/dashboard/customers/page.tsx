@@ -1,4 +1,5 @@
 import { fetchCustomers, fetchCustomersPages } from "@/app/lib/data";
+import { CreateCustomer } from "@/app/ui/customers/buttons";
 import Table from "@/app/ui/customers/table";
 import { lusitana } from "@/app/ui/fonts";
 import Pagination from "@/app/ui/invoices/pagination";
@@ -24,7 +25,10 @@ export default async function Page({
       <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
         Customers
       </h1>
-      <Search placeholder="Search customers..." />
+      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+        <Search placeholder="Search customers..." />
+        <CreateCustomer />
+      </div>
       <Suspense key={query + currentPage} fallback={<CustomersTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
