@@ -102,7 +102,7 @@ export default function DashboardSkeleton() {
   );
 }
 
-export function TableRowSkeleton() {
+export function InvoiceTableRowSkeleton() {
   return (
     <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
       {/* Customer Name and Image */}
@@ -134,6 +134,35 @@ export function TableRowSkeleton() {
           <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
           <div className="h-[38px] w-[38px] rounded bg-gray-100"></div>
         </div>
+      </td>
+    </tr>
+  );
+}
+export function CustomerTableRowSkeleton() {
+  return (
+    <tr className="w-full border-b border-gray-100 last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg">
+      {/* Customer Name and Image */}
+      <td className="w-3/12 whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-full bg-gray-100"></div>
+          <div className="h-6 w-24 rounded bg-gray-100"></div>
+        </div>
+      </td>
+      {/* Email */}
+      <td className="w-3/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+        <div className="h-6 w-32 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Invoices */}
+      <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Pending */}
+      <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
+      </td>
+      {/* Total Paid */}
+      <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+        <div className="h-6 w-16 rounded bg-gray-100"></div>
       </td>
     </tr>
   );
@@ -203,14 +232,63 @@ export function InvoicesTableSkeleton() {
               </tr>
             </thead>
             <tbody className="bg-white">
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
-              <TableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
+              <InvoiceTableRowSkeleton />
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+export function CustomersTableSkeleton() {
+  return (
+    <div className="mt-6 flow-root">
+      <div className="overflow-x-auto">
+        <div className="inline-block min-w-full align-middle">
+          <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
+            <div className="md:hidden">
+              {/* <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton />
+            <InvoicesMobileSkeleton /> */}
+            </div>
+            <table className="hidden min-w-full rounded-md text-gray-900 md:table">
+              <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
+                <tr>
+                  <th scope="col" className="col-span-3 px-4 py-5 font-medium sm:pl-6">
+                    Name
+                  </th>
+                  <th scope="col" className="col-span-3 px-3 py-5 font-medium">
+                    Email
+                  </th>
+                  <th scope="col" className="col-span-2 px-3 py-5 font-medium">
+                    Total Invoices
+                  </th>
+                  <th scope="col" className="col-span-2 px-3 py-5 font-medium">
+                    Total Pending
+                  </th>
+                  <th scope="col" className="col-span-2 px-4 py-5 font-medium">
+                    Total Paid
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 text-gray-900">
+                <CustomerTableRowSkeleton />
+                <CustomerTableRowSkeleton />
+                <CustomerTableRowSkeleton />
+                <CustomerTableRowSkeleton />
+                <CustomerTableRowSkeleton />
+                <CustomerTableRowSkeleton />
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
