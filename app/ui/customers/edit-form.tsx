@@ -36,7 +36,6 @@ export default function EditCustomerForm({
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
                 defaultValue={customer.name}
                 aria-describedby="name-error"
               />
@@ -66,7 +65,6 @@ export default function EditCustomerForm({
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
                 defaultValue={customer.email}
                 aria-describedby="email-error"
               />
@@ -96,7 +94,6 @@ export default function EditCustomerForm({
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                required
                 defaultValue={customer.image_url}
                 aria-describedby="image_url-error"
               />

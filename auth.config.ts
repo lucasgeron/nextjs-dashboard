@@ -9,10 +9,14 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
       const isSeedRoute = nextUrl.pathname.startsWith('/seed');
+      const isAboutPage = nextUrl.pathname.startsWith('/about');
 
       // Allow access to /seed route regardless of authentication
       if (isSeedRoute) return true;
       
+      // Allow access to /about page regardless of authentication
+      if (isAboutPage) return true;
+
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page

@@ -30,7 +30,6 @@ export default function Form() {
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
                 aria-describedby="name-error"
               />
             </div>
@@ -59,7 +58,6 @@ export default function Form() {
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
                 aria-describedby="email-error"
               />
             </div>
@@ -88,7 +86,6 @@ export default function Form() {
                 type="text"
                 placeholder="Enter Name"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
                 aria-describedby="image_url-error"
               />
             </div>
