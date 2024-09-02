@@ -65,32 +65,32 @@ export default async function CustomersTable({
             </div>
             <table className="hidden min-w-full rounded-md text-gray-900 md:table">
               <thead className="rounded-md bg-gray-50 text-left text-sm font-normal">
-                <tr>
-                  <th scope="col" className="w-3/12 px-4 py-5 font-medium sm:pl-6">
+                <tr className='grid grid-cols-10'>
+                  <th scope="col" className="col-span-3 flex flex-grow px-4 py-5 font-medium">
                     Name
                   </th>
-                  <th scope="col" className="w-3/12 px-3 py-5 font-medium">
+                  <th scope="col" className="col-span-2 px-3 py-5 font-medium">
                     Email
                   </th>
-                  <th scope="col" className="w-2/12 px-3 py-5 font-medium">
+                  <th scope="col" className="col-span-1 px-3 py-5 font-medium">
                     Total Invoices
                   </th>
-                  <th scope="col" className="w-2/12 px-3 py-5 font-medium">
+                  <th scope="col" className="col-span-1 px-3 py-5 font-medium">
                     Total Pending
                   </th>
-                  <th scope="col" className="w-2/12 px-4 py-5 font-medium">
+                  <th scope="col" className="col-span-1 px-4 py-5 font-medium">
                     Total Paid
                   </th>
-                  <th scope="col" className="w-1/12 px-4 py-5 font-medium">
-                    Actions
+                  <th scope="col" className="col-span-2 px-4 py-5 font-medium">
+                    {/* Actions */}
                   </th>
                 </tr>
               </thead>
 
               <tbody className="divide-y divide-gray-200 text-gray-900">
                 {customers.map((customer) => (
-                  <tr key={customer.id} className="group">
-                    <td className="w-3/12 whitespace-nowrap bg-white py-5 pl-4 pr-3 text-sm text-black group-first-of-type:rounded-md group-last-of-type:rounded-md sm:pl-6">
+                  <tr key={customer.id} className="group grid grid-cols-10">
+                    <td className="col-span-3 whitespace-nowrap bg-white px-4 py-5 text-sm">
                       <div className="flex items-center gap-3">
                         <Image
                           src={customer.image_url}
@@ -102,19 +102,19 @@ export default async function CustomersTable({
                         <p>{customer.name}</p>
                       </div>
                     </td>
-                    <td className="w-3/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+                    <td className="col-span-2 whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.email}
                     </td>
-                    <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+                    <td className="col-span-1 whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.total_invoices}
                     </td>
-                    <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm">
+                    <td className="col-span-1 whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.total_pending}
                     </td>
-                    <td className="w-2/12 whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
+                    <td className="col-span-1 whitespace-nowrap bg-white px-4 py-5 text-sm">
                       {customer.total_paid}
                     </td>
-                    <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                    <td className="col-span-2 whitespace-nowrap bg-white px-4 py-5 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                       <div className="flex justify-end gap-3">
                         <UpdateCustomer id={customer.id} />
                         <DeleteCustomer id={customer.id} />

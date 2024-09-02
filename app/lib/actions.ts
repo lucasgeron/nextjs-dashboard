@@ -7,6 +7,7 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // INVOICES
 const InvoiceFormSchema = z.object({
@@ -120,18 +121,22 @@ export async function deleteInvoice(id: string) {
 
 // CUSTOMERS
 const CustomerFormSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  email: z.string(),
-  date: z.string(),
-})
-const CreateCustomer = CustomerFormSchema.omit({ id: true, date: true })
-const UpdateCustomer = CustomerFormSchema.omit({ id: true, date: true })
+  id: z.string().uuid("Invalid UUID format."),
+  name: z.string().min(1, "Name is required.").max(255, "Name must be 255 characters or less."),
+  email: z.string()
+    .min(1, "Email is required.")
+    .max(255, "Email must be 255 characters or less.")
+    .regex(emailPattern, "Invalid email format."),
+  image_url: z.string().min(1, "Image URL is required.").max(255, "Image URL must be 255 characters or less."),
+});
+const CreateCustomer = CustomerFormSchema.omit({ id: true })
+const UpdateCustomer = CustomerFormSchema.omit({ id: true })
 
 export type CustomerState = {
   errors?: {
     name?: string[];
     email?: string[];
+    image_url?: string[];
   };
   message?: string | null;
 };
@@ -141,6 +146,7 @@ export async function createCustomer(prevState: CustomerState, formData: FormDat
   const validatedFields = CreateCustomer.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
+    image_url: formData.get('image_url')
   });
 
   // If form validation fails, return errors early. Otherwise, continue.
@@ -152,14 +158,13 @@ export async function createCustomer(prevState: CustomerState, formData: FormDat
   }
 
   // Prepare data for insertion into the database
-  const { name, email } = validatedFields.data;
-  const date = new Date().toISOString().split('T')[0];
+  const { name, email, image_url } = validatedFields.data;
 
   // Insert data into the database
   try {
     await sql`
-      INSERT INTO customers (name, email)
-      VALUES (${name}, ${email})
+      INSERT INTO customers (name, email, image_url)
+      VALUES (${name}, ${email}, ${image_url})
     `;
   } catch (error) {
     // If a database error occurs, return a more specific error.
@@ -181,6 +186,7 @@ export async function updateCustomer(
   const validatedFields = UpdateCustomer.safeParse({
     name: formData.get('name'),
     email: formData.get('email'),
+    image_url: formData.get('image_url')
   });
 
   if (!validatedFields.success) {
@@ -190,12 +196,12 @@ export async function updateCustomer(
     };
   }
 
-  const { name, email } = validatedFields.data;
+  const { name, email, image_url } = validatedFields.data;
 
   try {
     await sql`
       UPDATE customers
-      SET name = ${name}, email = ${email}
+      SET name = ${name}, email = ${email}, image_url = ${image_url}
       WHERE id = ${id}
     `;
   } catch (error) {
