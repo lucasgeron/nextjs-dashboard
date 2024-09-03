@@ -1,9 +1,10 @@
 import { fetchCustomers, fetchCustomersPages } from "@/app/lib/data";
+import Breadcrumbs from "@/app/ui/app/breadcrumbs";
 import { CreateCustomer } from "@/app/ui/customers/buttons";
 import Table from "@/app/ui/customers/table";
 import { lusitana } from "@/app/ui/fonts";
-import Pagination from "@/app/ui/invoices/pagination";
-import Search from "@/app/ui/search";
+import Pagination from "@/app/ui/app/pagination";
+import Search from "@/app/ui/app/search";
 import { CustomersTableSkeleton } from "@/app/ui/skeletons";
 import { Suspense } from "react";
 
@@ -22,9 +23,12 @@ export default async function Page({
 
   return (
     <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Customers</h1>
-      </div>
+      <Breadcrumbs
+        breadcrumbs={[
+          { label: 'Dashboard', href: '/dashboard' },
+          { label: 'Customers', href: '/dashboard/customers', active: true },
+        ]}
+      />
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
         <Search placeholder="Search customers..." />
         <CreateCustomer />

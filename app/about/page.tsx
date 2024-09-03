@@ -1,18 +1,30 @@
-import FlickeringGrid from "@/app/ui/flickering-grid";
+import Breadcrumbs from "../ui/app/breadcrumbs"
 
 export default function Page() {
+
   return (
-    <div className="relative h-[500px] rounded-lg w-full bg-background overflow-hidden ">
-      <FlickeringGrid
-        className="z-0 absolute inset-0 size-full"
-        squareSize={4}
-        gridGap={6}
-        color="#6B7280"
-        maxOpacity={0.5}
-        flickerChance={0.1}
-        height={800}
-        width={800}
-      />
-    </div>
-  );
+    <>
+      <main className="w-full">
+
+        <Breadcrumbs
+          breadcrumbs={[
+            { label: 'About', href: '/about', active: true },
+          ]}
+        />
+        <div className="grid grid-cols-3 gap-4">
+          {[1, 2, 3].map((card) => {
+            return (
+              <div key={card} className="border rounded-lg">
+                <div className="p-4">
+                  <p className="mt-4 ">
+                    This is a simple Next.js app that demonstrates how to use Tailwind CSS.
+                  </p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </main>
+    </>
+  )
 }
