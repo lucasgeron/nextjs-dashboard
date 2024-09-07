@@ -202,7 +202,7 @@ export async function fetchCustomerById(id: string) {
     const customer = data.rows.map((customer) => ({
       ...customer,
     }));
-    
+
     return customer[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -225,6 +225,47 @@ export async function fetchCustomers() {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
+  }
+}
+
+export async function fetchAPICustomers() {
+  const graphqlQuery = {
+    query: `
+      {
+        customers {
+          email
+          id
+          imageUrl
+          name
+          totalInvoices
+          totalPending
+          totalPaid
+        }
+      }
+    `
+  };
+
+  try {
+    const response = await fetch('http://localhost:5000/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(graphqlQuery)
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    // the response itself is an array of hashes, not an array of CustomersType.
+    // The problem here is to handle the request correctly and compose the objects 
+    // in the frontend to keep types consistent.
+    const data = await response.json();
+    return data.data.customers;
+  } catch (error) {
+    console.error('Error fetching customers:', error);
+    throw error;
   }
 }
 

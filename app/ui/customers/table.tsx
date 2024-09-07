@@ -5,7 +5,7 @@ import {
   CustomersTableType,
   FormattedCustomersTable,
 } from '@/app/lib/definitions';
-import { fetchFilteredCustomers } from '@/app/lib/data';
+import { fetchAPICustomers, fetchFilteredCustomers } from '@/app/lib/data';
 import { DeleteCustomer, UpdateCustomer } from './buttons';
 
 export default async function CustomersTable({
@@ -15,7 +15,9 @@ export default async function CustomersTable({
   query: string;
   currentPage: number;
 }) {
-  const customers = await fetchFilteredCustomers(query, currentPage);
+  // const customers = await fetchFilteredCustomers(query, currentPage);
+  const customers = await fetchAPICustomers();
+  console.log(customers)
 
   return (
     <div className="mt-6 flow-root">
@@ -32,13 +34,13 @@ export default async function CustomersTable({
                     <div>
                       <div className="mb-2 flex items-center">
                         <div className="flex items-center gap-3">
-                          <Image
+                          {/* <Image
                             src={customer.image_url}
                             className="rounded-full"
                             alt={`${customer.name}'s profile picture`}
                             width={28}
                             height={28}
-                          />
+                          /> */}
                           <p>{customer.name}</p>
                         </div>
                       </div>
@@ -50,15 +52,15 @@ export default async function CustomersTable({
                   <div className="flex w-full items-center justify-between border-b py-5">
                     <div className="flex w-1/2 flex-col">
                       <p className="text-xs">Pending</p>
-                      <p className="font-medium">{customer.total_pending}</p>
+                      <p className="font-medium">{customer.totalPending}</p>
                     </div>
                     <div className="flex w-1/2 flex-col">
                       <p className="text-xs">Paid</p>
-                      <p className="font-medium">{customer.total_paid}</p>
+                      <p className="font-medium">{customer.totalPaid}</p>
                     </div>
                   </div>
                   <div className="pt-4 text-sm">
-                    <p>{customer.total_invoices} invoices</p>
+                    <p>{customer.totalInvoices} invoices</p>
                   </div>
                 </div>
               ))}
@@ -92,13 +94,13 @@ export default async function CustomersTable({
                   <tr key={customer.id} className="group grid grid-cols-10 first:rounded-t-lg last:rounded-b-lg bg-white dark:bg-gray-800 dark:text-slate-500 items-center">
                     <td className="col-span-3 whitespace-nowrap px-4 py-3 text-sm ">
                       <div className="flex items-center gap-3">
-                        <Image
+                        {/* <Image
                           src={customer.image_url}
                           className="rounded-full"
                           alt={`${customer.name}'s profile picture`}
                           width={28}
                           height={28}
-                        />
+                        /> */}
                         <p>{customer.name}</p>
                       </div>
                     </td>
@@ -106,13 +108,13 @@ export default async function CustomersTable({
                       {customer.email}
                     </td>
                     <td className="col-span-1 whitespace-nowrap px-4 py-3 text-sm">
-                      {customer.total_invoices}
+                      {customer.totalInvoices}
                     </td>
                     <td className="col-span-1 whitespace-nowrap px-4 py-3 text-sm">
-                      {customer.total_pending}
+                      {customer.totalPending}
                     </td>
                     <td className="col-span-1 whitespace-nowrap px-4 py-3 text-sm">
-                      {customer.total_paid}
+                      {customer.totalPaid}
                     </td>
                     <td className="col-span-2 whitespace-nowrap px-4 py-3 text-sm group-first-of-type:rounded-md group-last-of-type:rounded-md">
                       <div className="flex justify-end gap-3">
