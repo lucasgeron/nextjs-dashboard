@@ -25,7 +25,7 @@ export default async function CustomersTable({
         <div className="inline-block min-w-full align-middle">
           <div className="overflow-hidden rounded-md bg-gray-50 dark:bg-gray-900 p-2 md:pt-0">
             <div className="md:hidden">
-              {customers?.map((customer) => (
+              {customers?.map((customer: FormattedCustomersTable) => (
                 <div
                   key={customer.id}
                   className="mb-2 w-full rounded-md bg-white dark:bg-gray-900 p-4"
@@ -34,13 +34,13 @@ export default async function CustomersTable({
                     <div>
                       <div className="mb-2 flex items-center">
                         <div className="flex items-center gap-3">
-                          {/* <Image
-                            src={customer.image_url}
+                          <Image
+                            src={customer.imageUrl}
                             className="rounded-full"
                             alt={`${customer.name}'s profile picture`}
                             width={28}
                             height={28}
-                          /> */}
+                          />
                           <p>{customer.name}</p>
                         </div>
                       </div>
@@ -90,17 +90,17 @@ export default async function CustomersTable({
               </thead>
 
               <tbody className="divide-y divide-gray-200 dark:divide-slate-500 ">
-                {customers.map((customer) => (
+                {customers.map((customer: FormattedCustomersTable) => (
                   <tr key={customer.id} className="group grid grid-cols-10 first:rounded-t-lg last:rounded-b-lg bg-white dark:bg-gray-800 dark:text-slate-500 items-center">
                     <td className="col-span-3 whitespace-nowrap px-4 py-3 text-sm ">
                       <div className="flex items-center gap-3">
-                        {/* <Image
-                          src={customer.image_url}
+                        <Image
+                          src={customer.imageUrl}
                           className="rounded-full"
                           alt={`${customer.name}'s profile picture`}
                           width={28}
                           height={28}
-                        /> */}
+                        />
                         <p>{customer.name}</p>
                       </div>
                     </td>
